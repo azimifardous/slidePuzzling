@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="root" fx:id="root" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.seng218.slidepuzzling.MainController">
+    <children>
+    <HBox fx:id="top" spacing="5">
+        <Button id="newGame" fx:id="newGame" onAction="#handleNewGame" text="New Game" />
+        <Button id="restartLvl" fx:id="restartLvl" onAction="#handleRestartLevel" text="Restart Level" />
+        <Button id="quit" fx:id="quit" onAction="#handleQuit" text="Quit" />
+    </HBox>
+    <HBox fx:id="stats" spacing="5">
+        <Label id="moves" fx:id="moves" text="Moves: 0" />
+        <Label id="level" fx:id="level" text="Level: 1" />
+    </HBox>
+    <GridPane fx:id="gridPane" hgap="5" vgap="5" />
+    </children>
+</VBox>
