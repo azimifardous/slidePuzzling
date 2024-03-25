@@ -6,9 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,8 +42,8 @@ public class MainController implements Initializable {
         setMoves();
         setLevels();
 
-        for(i = 0; i < 3; i++)
-            for(j = 0; j < 3; j++) {
+        for (i = 0; i < 3; i++)
+            for (j = 0; j < 3; j++) {
                 int x = i, y = j;
                 buttonsArr[i][j].setOnAction(e -> {
                     puzzle.slide(buttonsArr, x, y);

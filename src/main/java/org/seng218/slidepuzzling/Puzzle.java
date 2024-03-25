@@ -1,8 +1,5 @@
 package org.seng218.slidepuzzling;
 
-import javafx.event.Event;
-import javafx.event.EventTarget;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,12 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class Puzzle {
     private int currentLevel, numberOfMoves;
     private boolean isWin;
-    private MainController controller;
+    private final MainController controller;
 
     public Puzzle(MainController controller) {
         this.controller = controller;
@@ -41,25 +41,27 @@ public class Puzzle {
         }
     }
     private void shuffleNumbers(Button[][] arr) {
+        List<int[]> positions = new ArrayList<>();
         Random random = new Random();
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (!(i == 2 && j == 2)) {
+                    positions.add(new int[]{i, j});
+                }
+            }
+        }
+
+        // Shuffle the positions
+        Collections.shuffle(positions);
+
         int emptyRow = 2;
         int emptyCol = 2;
 
-        for (int move = 0; move < (2 * currentLevel) - 1; move++) {
-            int direction = random.nextInt(4); // 0: UP, 1: DOWN, 2: LEFT, 3: RIGHT
-
-            int newRow = emptyRow;
-            int newCol = emptyCol;
-
-            if (direction == 0 && emptyRow > 0) { // UP
-                newRow = emptyRow - 1;
-            } else if (direction == 1 && emptyRow < 2) { // DOWN
-                newRow = emptyRow + 1;
-            } else if (direction == 2 && emptyCol > 0) { // LEFT
-                newCol = emptyCol - 1;
-            } else if (direction == 3 && emptyCol < 2) { // RIGHT
-                newCol = emptyCol + 1;
-            }
+        // Perform the shuffling based on the shuffled positions
+        for (int[] newPosition : positions) {
+            int newRow = newPosition[0];
+            int newCol = newPosition[1];
 
             arr[emptyRow][emptyCol].setText(arr[newRow][newCol].getText());
             arr[newRow][newCol].setText("");
@@ -172,9 +174,6 @@ public class Puzzle {
         finishStage.show();
     }
 
-    // handle next level once it's done
-
-
     public int getCurrentLevel() {
         return currentLevel;
     }
@@ -184,15 +183,7 @@ public class Puzzle {
     public int getNumberOfMoves() {
         return numberOfMoves;
     }
-    public void setNumberOfMoves(int numberOfMoves) {
-        this.numberOfMoves = numberOfMoves;
-    }
     public boolean isWin() {
         return isWin;
     }
-
-    public void setWin(boolean win) {
-        isWin = win;
-    }
-
 }
